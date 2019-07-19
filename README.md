@@ -1,7 +1,13 @@
 # awesome-qrcode
 
+
+
+
 ## Project setup
 ```
+# 这个项目有个依赖安装非常麻烦 awesome-qr
+# 它依赖一个canvas包, 但是这个包需要windows电脑预安装一些环境依赖
+# 点击这个链接查看详情 https://github.com/Automattic/node-canvas/wiki/Installation:-Windows
 yarn install
 ```
 
