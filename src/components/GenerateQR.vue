@@ -2,6 +2,15 @@
     .title-alert{
         margin:10px 0;
     }
+    .small {
+        font-size:12px;
+    }
+    .title{
+        padding:10px;
+    }
+    .center{
+        text-align: center;
+    }
     #final-container {
         position: relative;
         margin: 0 20px;
@@ -41,7 +50,7 @@
     }
 </style>
 <template>
-    <div v-loading="!QR">
+    <div v-loading="!QR" style="padding: 0 10px;">
         <el-steps :active="active" finish-status="success" style="margin:10px;">
             <el-step v-for="item in steps" :title="item"></el-step>
         </el-steps>
@@ -64,6 +73,7 @@
                     title="选择图片"
                     type="info">
             </el-alert>
+            <p class="small title center">选择一张背景图片，您也可以不选择</p>
             <input type="file" ref="fileInput" @change="listenFileInput" />
             <PreNext :index="active" :total="steps.length" @prev="prev" @next="next"></PreNext>
         </div>
@@ -74,45 +84,68 @@
                     title="修改Tip文字"
                     type="info">
             </el-alert>
-            <el-input v-model="tip"></el-input>
+            <el-input  type="textarea" v-model="tip"></el-input>
             <PreNext :index="active" :total="steps.length" @prev="prev" @next="next"></PreNext>
         </div>
 
 
-        <h3>实时预览</h3>
+        <div v-show="active === 3">
+            <el-button type="success" @click="download">下载</el-button>
+            <PreNext :index="active" :total="steps.length" @prev="prev" @next="next"></PreNext>
+        </div>
+
+
+        <el-alert :closable="false" class="title-alert" center
+                  title="实时阅览"
+                  type="success">
+        </el-alert>
+        <div v-if="!inputContent" style="text-align: center;font-size:12px;;padding:10px;">无预览(请输入文字)</div>
         <div id="final-container">
-            <div v-if="!inputContent">无预览(请输入文字)</div>
             <div id="qrcode" ref="qrcode"></div>
             <div class="icon-container">
                 <div class="icon">{{icon}}</div>
             </div>
-            <p class="tip">{{tip}}</p>
+            <p class="tip" v-html="tipResolve"></p>
         </div>
 
+
+        <bottom></bottom>
     </div>
 </template>
 <script lang="ts">
     import {onQROK} from "../common/common";
     import PreNext from './PreNext'
-    import Vue from 'vue'
+    import {sleep} from "../common/common";
+    import html2canvas from 'html2canvas'
+    import bottom from './bottom.vue'
 
     export default  {
         name: "GenerateQR",
         data() {
             return {
                 QR: null,
-                active: 2,
+                active: 0,
                 steps: ["文字", "图片", "Tip", "下载"],
-                inputContent: "111",
+                inputContent: "",
                 imgData: null,
                 tip: "这是tip文字,您可以修改的",
                 icon: "💖"
             };
         },
         components: {
-            PreNext
+            PreNext,
+            bottom,
         },
-        computed: {},
+        computed: {
+            tipResolve() {
+                var tip = this.tip;
+                if (!tip) {
+                    return tip;
+                }
+                tip = tip.replace(/[\r\n]/g, "<br>")
+                return tip;
+            }
+        },
         watch: {},
         created() {
         },
@@ -132,7 +165,21 @@
             }
         },
         methods: {
-            render() {
+            download() {
+                html2canvas(document.getElementById("final-container")).then(function(canvas) {
+
+                    var oA = document.createElement("a");
+                    oA.download = 'awesome-qrcode.png';// 设置下载的文件名，默认是'下载'
+                    oA.href = canvas.toDataURL();
+                    document.body.appendChild(oA);
+                    oA.click();
+                    oA.remove(); // 下载之后把创建的元素删除
+
+
+                });
+            },
+            async render() {
+                await sleep(400);
                 let qrcodeHeight = this.$refs.qrcode.getBoundingClientRect().width;
                 this.$refs.qrcode.style.height = `${qrcodeHeight}px`;
 
@@ -145,7 +192,11 @@
                 });
             },
             listenFileInput(e) {
-                var img = new Image;
+                if (!e.target.files[0]) {
+                    this.imgData = null;
+                    return;
+                }
+                var img = new Image();
                 img.onload = () => {
                     this.imgData = img;
                 };

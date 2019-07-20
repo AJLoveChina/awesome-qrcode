@@ -7,3 +7,11 @@ export function onQROK(): Promise<any> {
         });
     })
 }
+
+export function sleep(millSeconds:number) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(true);
+        }, millSeconds)
+    })
+}

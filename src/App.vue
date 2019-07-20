@@ -17,6 +17,10 @@ export default Vue.extend({
 </script>
 
 <style lang="less">
+  *{
+    padding:0;margin:0;
+  }
+  @fontColor:#333;
   #app{
     max-width:900px;
     width:100%;
@@ -24,6 +28,9 @@ export default Vue.extend({
   }
   body{
     font-family: "Microsoft YaHei UI";
-    color:#333;
+    color:@fontColor;
+  }
+  a{
+    color:@fontColor;
   }
 </style>
