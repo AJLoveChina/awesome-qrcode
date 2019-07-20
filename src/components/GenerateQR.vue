@@ -48,6 +48,11 @@
             color:white;
         }
     }
+
+    .realimg{
+        text-align: center;
+        margin:20px 0;
+    }
 </style>
 <template>
     <div v-loading="!QR" style="padding: 0 10px;">
@@ -91,6 +96,8 @@
 
         <div v-show="active === 3">
             <el-button type="success" @click="download">下载</el-button>
+            <h6 v-if="realimg" style="text-align: center">如果没有自动下载,请长按图片或者鼠标右键下载</h6>
+            <div ref="realimg" class="realimg"></div>
             <PreNext :index="active" :total="steps.length" @prev="prev" @next="next"></PreNext>
         </div>
 
@@ -125,12 +132,13 @@
         data() {
             return {
                 QR: null,
-                active: 0,
+                active: 3,
                 steps: ["文字", "图片", "Tip", "下载"],
-                inputContent: "",
+                inputContent: "123",
                 imgData: null,
                 tip: "这是tip文字,您可以修改的",
-                icon: "💖"
+                icon: "💖",
+                realimg: null,
             };
         },
         components: {
@@ -165,8 +173,27 @@
             }
         },
         methods: {
+            buildImgElementFromCanvas(canvas) {
+                return new Promise((resolve, reject) => {
+                    let img = document.createElement("img");
+                    img.src = canvas.toDataURL();
+                    img.onload = () => {
+                        resolve(img);
+                    }
+                    img.onerror = () => {
+                        resolve(null)
+                    }
+                })
+            },
             download() {
-                html2canvas(document.getElementById("final-container")).then(function(canvas) {
+                html2canvas(document.getElementById("final-container")).then((canvas) => {
+                    this.buildImgElementFromCanvas(canvas).then(img => {
+                        if (img) {
+                            img.width = 200;
+                            this.$refs.realimg.appendChild(img);
+                            this.realimg = img;
+                        }
+                    });
 
                     var oA = document.createElement("a");
                     oA.download = 'awesome-qrcode.png';// 设置下载的文件名，默认是'下载'
