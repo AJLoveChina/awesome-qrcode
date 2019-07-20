@@ -132,9 +132,9 @@
         data() {
             return {
                 QR: null,
-                active: 3,
+                active: 0,
                 steps: ["文字", "图片", "Tip", "下载"],
-                inputContent: "123",
+                inputContent: "",
                 imgData: null,
                 tip: "这是tip文字,您可以修改的",
                 icon: "💖",
