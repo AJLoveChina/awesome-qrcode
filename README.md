@@ -1,6 +1,9 @@
 # awesome-qrcode
 
+> create awesome QRcode in browser
 
+## TODO
+* wechat support image download 
 
 
 ## Project setup
@@ -30,6 +33,3 @@ yarn run test
 ```
 yarn run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
