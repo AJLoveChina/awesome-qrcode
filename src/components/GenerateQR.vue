@@ -113,6 +113,7 @@
     </div>
 </template>
 <script lang="ts">
+    // @ts-nocheck
     import {onQROK} from "../common/common";
     import PreNext from './PreNext'
     import {sleep} from "../common/common";
@@ -146,7 +147,6 @@
                 return tip;
             }
         },
-        watch: {},
         created() {
         },
         mounted() {

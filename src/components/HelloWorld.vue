@@ -7,6 +7,7 @@
 </template>
 
 <script lang="ts">
+    // @ts-nocheck
     import Vue from 'vue';
     import {onQROK} from "../common/common";
     import GenerateQR from './GenerateQR.vue'
