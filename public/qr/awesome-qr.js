@@ -34,9 +34,7 @@
 var AwesomeQRCode;
 var GIFE;
 
-require([__awesome_qr_base_path+'/gif.js'], function (gifEncoder) {
-    GIFE = gifEncoder;
-});
+GIFE = window.GIF;
 
 // gifuct-js.js
 // https://raw.githubusercontent.com/matt-way/gifuct-js/master/dist/gifuct-js.js

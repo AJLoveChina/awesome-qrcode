@@ -8,7 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>awesome-qrcode</title>
-    <script type="text/javascript" src="<%= BASE_URL %>qr/require.js"></script>
+    <script type="text/javascript">
+      window.__awesome_qr_base_path = "<%= BASE_URL %>qr";
+    </script>
+    <script type="text/javascript" src="<%= BASE_URL %>qr/gif.js"></script>
+    <script type="text/javascript" src="<%= BASE_URL %>qr/awesome-qr.js"></script>
   </head>
   <body>
     <noscript>
