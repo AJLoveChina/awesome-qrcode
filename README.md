@@ -2,9 +2,8 @@
 
 > create awesome QRcode in browser
 
-## TODO
-* wechat support image download 
-
+## Feature
+* support create QRcode in wechat/weixin丶mobile browsers丶and PC
 
 ## Project setup
 ```
