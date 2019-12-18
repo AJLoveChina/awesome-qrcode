@@ -1,8 +1,8 @@
 name: Node CI
 
-on: 
+on:
   push:
-    branches: 
+    branches:
       - master
 
 jobs:
@@ -20,18 +20,18 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-        
+
     - uses: actions/setup-python@v1
       with:
         python-version: '2.x'
         architecture: 'x64'
-    
+
     - name: npm install, build, and test
       run: |
         npm install
         npm run build
         rm -rf docs
-        mkir docs
+        mkdir docs
         cp dist/* docs/*
         git add docs/
         git commit -m "update docs by Github Actions"
