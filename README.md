@@ -1,12 +1,12 @@
 # awesome-qrcode
+> 在浏览器中创作非常炫酷的背景图片二维码
 
-> create awesome QRcode in browser
+## 未完成功能(TODO list)
+* [ ] wechat support image download 
+* [ ] 支持修改左下角的icon图标
 
-## TODO
-* wechat support image download 
 
-
-## Project setup
+## 开发者指南
 ```
 # 这个项目有个依赖安装非常麻烦 awesome-qr
 # 它依赖一个canvas包, 但是这个包需要windows电脑预安装一些环境依赖
@@ -14,22 +14,19 @@
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+Compiles and hot-reloads for development
 ```
 yarn run serve
 ```
-
-### Compiles and minifies for production
+Compiles and minifies for production
 ```
 yarn run build
 ```
-
-### Run your tests
+Run your tests
 ```
 yarn run test
 ```
-
-### Lints and fixes files
+Lints and fixes files
 ```
 yarn run lint
 ```

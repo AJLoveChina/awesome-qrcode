@@ -20,7 +20,11 @@
 
         #qrcode {
             width: 100%;
-            border-bottom: 1px solid #ccc;
+        }
+        .one-single-line{
+            width:100%;
+            height:1px;
+            background-color: #cccccc;
         }
         .tip {
             text-align: center;
@@ -46,6 +50,7 @@
             text-align: center;
             background-color: #F56C6C;
             color:white;
+            font-size:16px;
         }
     }
 </style>
@@ -102,6 +107,7 @@
         <div v-if="!inputContent" style="text-align: center;font-size:12px;;padding:10px;">无预览(请输入文字)</div>
         <div id="final-container">
             <div id="qrcode" ref="qrcode"></div>
+            <div class="one-single-line"></div>
             <div class="icon-container">
                 <div class="icon">{{icon}}</div>
             </div>
@@ -114,9 +120,9 @@
 </template>
 <script lang="ts">
     // @ts-nocheck
-    import {onQROK} from "../common/common";
-    import PreNext from './PreNext'
-    import {sleep} from "../common/common";
+    import {onQROK} from "@/common/common";
+    import PreNext from './PreNext.vue'
+    import {sleep} from "@/common/common";
     import html2canvas from 'html2canvas'
     import bottom from './bottom.vue'
 
