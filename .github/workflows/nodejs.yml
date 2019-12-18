@@ -33,3 +33,5 @@ jobs:
         git push origin master
       env:
         CI: true
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
