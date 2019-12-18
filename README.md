@@ -1,8 +1,8 @@
 # awesome-qrcode
 > 在浏览器中创作非常炫酷的背景图片二维码
 
-## 未完成功能(TODO list)
-* [ ] wechat support image download 
+## 功能列表(TODO list)
+* [x] 支持微信 support image download 
 * [ ] 支持修改左下角的icon图标
 
 
