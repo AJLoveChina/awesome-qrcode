@@ -40,8 +40,8 @@ jobs:
         git commit -m "update docs by Github Actions"
         git remote set-url --push origin https://AJLoveChina:$GITHUB_TOKEN@github.com/AJLoveChina/awesome-qrcode
         git remote -v
-        git checkout -b master
-        git push origin HEAD:master --force
+        git checkout -b docs
+        git push origin HEAD:docs --force
       env:
         CI: true
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
