@@ -4,6 +4,7 @@
 ## 功能列表(TODO list)
 * [x] 支持微信 support image download 
 * [ ] 支持修改左下角的icon图标
+* [ ] 支持修改正方形打点的颜色
 
 
 ## 开发者指南
