@@ -22,6 +22,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install, build, and test
       run: |
-        ls
+        npm install
+        npm run build
+        rm -rf docs
+        mkir docs
+        cp dist/* docs/*
+        git add docs/
+        git commit -m "update docs by Github Actions"
+        git push origin master
       env:
         CI: true
