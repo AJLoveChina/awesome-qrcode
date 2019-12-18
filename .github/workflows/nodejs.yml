@@ -29,6 +29,8 @@ jobs:
         mkdir docs
         cp -rf dist/* docs
         
+        git config --global user.email "735267452@qq.com"
+        git config --global user.name "AJLoveChina"
         git remote set-url --push origin https://AJLoveChina:$GITHUB_TOKEN@github.com/AJLoveChina/awesome-qrcode
         
         git add docs/
