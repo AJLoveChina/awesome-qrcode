@@ -7,10 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "awesome-qr": "^1.2.0",
     "core-js": "^2.6.5",
     "element-ui": "^2.10.1",
-    "html2canvas": "^1.0.0-rc.3",
     "vue": "^2.6.10"
   },
   "devDependencies": {

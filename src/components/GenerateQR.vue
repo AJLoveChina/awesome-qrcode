@@ -13,7 +13,8 @@
     }
     #final-container {
         position: relative;
-        margin: 0 20px;
+        max-width:300px;
+        margin: 0 auto;
         background-color: white;
         border: 1px solid #ccc;
         font-size:12px;
@@ -101,7 +102,10 @@
 
         <div v-show="active === 3">
             <el-button type="success" @click="download">下载</el-button>
-            <h6 v-if="realimg" style="text-align: center">如果没有自动下载,请长按图片或者鼠标右键下载</h6>
+            <h6 v-if="realimg" style="text-align: center">
+                如果没有自动下载,请长按图片或者鼠标右键下载 <br>
+                如果生成图片有问题，请多点几次（超过三次仍然有问题可以提问题给我）
+            </h6>
             <div ref="realimg" class="realimg"></div>
             <PreNext :index="active" :total="steps.length" @prev="prev" @next="next"></PreNext>
         </div>
@@ -130,7 +134,6 @@
     import {onQROK} from "@/common/common";
     import PreNext from './PreNext.vue'
     import {sleep} from "@/common/common";
-    import html2canvas from 'html2canvas'
     import bottom from './bottom.vue'
 
     export default  {
@@ -192,6 +195,7 @@
                 })
             },
             download() {
+                let html2canvas = window['html2canvas'] as any;
                 html2canvas(document.getElementById("final-container")).then((canvas) => {
                     this.buildImgElementFromCanvas(canvas).then(img => {
                         if (img) {
