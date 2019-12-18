@@ -196,6 +196,7 @@
                     this.buildImgElementFromCanvas(canvas).then(img => {
                         if (img) {
                             img.width = 200;
+                            this.$refs.realimg.innerHTML = "";
                             this.$refs.realimg.appendChild(img);
                             this.realimg = img;
                         }
