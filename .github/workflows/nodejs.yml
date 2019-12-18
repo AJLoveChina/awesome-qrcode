@@ -25,17 +25,23 @@ jobs:
       run: |
         npm install
         npm run build
+        
         rm -rf docs
         mkdir docs
         cp -rf dist/* docs
+        rm -rf dist
         
         git config --global user.email "735267452@qq.com"
         git config --global user.name "AJLoveChina"
-        git remote set-url --push origin https://AJLoveChina:$GITHUB_TOKEN@github.com/AJLoveChina/awesome-qrcode
+    
+        git show-ref
         
-        git add docs/
+        git add .
         git commit -m "update docs by Github Actions"
-        git push origin master
+        git remote set-url --push origin https://AJLoveChina:$GITHUB_TOKEN@github.com/AJLoveChina/awesome-qrcode
+        git remote -v
+        git checkout -b master
+        git push origin HEAD:master --force
       env:
         CI: true
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
