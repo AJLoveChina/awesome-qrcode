@@ -21,17 +21,20 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: npm install, build, and test
+    - name: npm install && build
       run: |
         npm install
         npm run build
         rm -rf docs
         mkdir docs
         cp -rf dist/* docs
+        
+        git remote set-url --push origin https://AJLoveChina:$GITHUB_TOKEN@github.com/AJLoveChina/awesome-qrcode
+        
         git add docs/
         git commit -m "update docs by Github Actions"
         git push origin master
       env:
         CI: true
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
