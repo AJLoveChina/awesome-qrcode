@@ -26,22 +26,17 @@ jobs:
         npm install
         npm run build
         
-        rm -rf docs
-        mkdir docs
-        cp -rf dist/* docs
-        rm -rf dist
-        
-        git config --global user.email "735267452@qq.com"
-        git config --global user.name "AJLoveChina"
-    
-        git show-ref
-        
-        git add .
-        git commit -m "update docs by Github Actions"
-        git remote set-url --push origin https://AJLoveChina:$GITHUB_TOKEN@github.com/AJLoveChina/awesome-qrcode
-        git remote -v
-        git checkout -b docs
-        git push origin HEAD:docs --force
+    - name: GitHub Push
+      uses: ad-m/github-push-action@v0.5.0
+      with:
+        # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
+        github_token: $GITHUB_TOKEN
+        # Destination branch to push changes
+        branch: docs
+        # Determines if force push is used
+        force: true
+        # Directory to change to before pushing.
+        directory: dist
       env:
         CI: true
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
