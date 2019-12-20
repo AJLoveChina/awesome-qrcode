@@ -22,7 +22,7 @@ jobs:
         npm install
         npm run build
         
-        git checkout -b $pages_branch
+        git checkout -b gh-pages
         rm -rf docs
         rm -rf src
         mv -rf dist/* ./
@@ -36,10 +36,8 @@ jobs:
         # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
         # Destination branch to push changes
-        branch: $pages_branch
+        branch: gh-pages
         # Determines if force push is used
         force: true
-        
-    - env:
-        pages_branch: gh-pages
+
       
