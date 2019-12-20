@@ -27,6 +27,9 @@ jobs:
         rm -rf src
         mv -f dist/* ./
         
+        git config --global user.name "AJLoveChina"
+        git config --global user.email "735267452@qq.com"
+        
         git add .
         git commit -m "update docs"
         
