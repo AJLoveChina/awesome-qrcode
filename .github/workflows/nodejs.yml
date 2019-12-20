@@ -25,7 +25,7 @@ jobs:
         git checkout -b gh-pages
         rm -rf docs
         rm -rf src
-        mv -rf dist/* ./
+        mv -f dist/* ./
         
         git add .
         git commit -m "update docs"
