@@ -22,7 +22,13 @@ jobs:
         npm install
         npm run build
         
-        git checkout -b docs
+        git checkout -b gh-pages
+        rm -rf docs
+        rm -rf src
+        mv -rf dist/* ./
+        
+        git add .
+        git commit -m "update docs"
         
     - name: GitHub Push
       uses: ad-m/github-push-action@v0.5.0
@@ -33,6 +39,4 @@ jobs:
         branch: docs
         # Determines if force push is used
         force: true
-        # Directory to change to before pushing.
-        directory: dist
       
