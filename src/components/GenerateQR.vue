@@ -1,4 +1,4 @@
-<style scoped lang="less">
+<style lang="less">
     .title-alert{
         margin:10px 0;
     }
@@ -13,8 +13,6 @@
     }
     #final-container {
         position: relative;
-        max-width:300px;
-        margin: 0 auto;
         background-color: white;
         border: 1px solid #ccc;
         font-size:12px;
@@ -53,6 +51,13 @@
             color:white;
             font-size:16px;
         }
+    }
+
+    @width: 300px;
+    #final-container-wrap{
+        position: relative;
+        max-width:@width;
+        margin:0 auto;
     }
 
     .realimg{
@@ -104,7 +109,7 @@
             <el-button type="success" @click="download">下载</el-button>
             <h6 v-if="realimg" style="text-align: center">
                 如果没有自动下载,请长按图片或者鼠标右键下载 <br>
-                如果生成图片有问题，请多点几次（超过三次仍然有问题可以提问题给我）
+                如果生成图片有问题，请多点几次（因为第三方库html2canvas总是不稳定）
             </h6>
             <div ref="realimg" class="realimg"></div>
             <PreNext :index="active" :total="steps.length" @prev="prev" @next="next"></PreNext>
@@ -116,14 +121,18 @@
                   type="success">
         </el-alert>
         <div v-if="!inputContent" style="text-align: center;font-size:12px;;padding:10px;">无预览(请输入文字)</div>
-        <div id="final-container">
-            <div id="qrcode" ref="qrcode"></div>
-            <div class="one-single-line"></div>
-            <div class="icon-container">
-                <div class="icon">{{icon}}</div>
+        <div style="height:10px;"></div>
+        <div id="final-container-wrap">
+            <div id="final-container">
+                <div id="qrcode" ref="qrcode"></div>
+                <div class="one-single-line"></div>
+                <div class="icon-container">
+                    <div class="icon">{{icon}}</div>
+                </div>
+                <p class="tip" v-html="tipResolve"></p>
             </div>
-            <p class="tip" v-html="tipResolve"></p>
         </div>
+        <div style="height:10px;"></div>
 
 
         <bottom></bottom>
@@ -196,7 +205,15 @@
             },
             download() {
                 let html2canvas = window['html2canvas'] as any;
-                html2canvas(document.getElementById("final-container")).then((canvas) => {
+                let containerWrap = document.getElementById("final-container-wrap")
+                html2canvas(containerWrap, {
+                    backgroundColor: null,
+                    allowTaint: true,
+                    logging: true,
+                    removeContainer: true,
+                    width: containerWrap.getBoundingClientRect().width + 20,
+                    height: containerWrap.getBoundingClientRect().height + 20,
+                }).then((canvas) => {
                     this.buildImgElementFromCanvas(canvas).then(img => {
                         if (img) {
                             img.width = 200;
