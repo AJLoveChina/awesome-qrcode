@@ -207,12 +207,11 @@
                 let html2canvas = window['html2canvas'] as any;
                 let containerWrap = document.getElementById("final-container-wrap")
                 html2canvas(containerWrap, {
+                    scale: 4,
                     backgroundColor: null,
                     allowTaint: true,
                     logging: true,
                     removeContainer: true,
-                    width: containerWrap.getBoundingClientRect().width + 20,
-                    height: containerWrap.getBoundingClientRect().height + 20,
                 }).then((canvas) => {
                     this.buildImgElementFromCanvas(canvas).then(img => {
                         if (img) {
